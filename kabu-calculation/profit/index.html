@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>株の損益計算｜かぶ電卓</title>
+
+    <meta
+        name="description"
+        content="株の購入価格、売却価格、株数から損益額と損益率を計算できます。"
+    >
+
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+
+    <header class="site-header">
+        <a href="../index.html" class="logo">かぶ電卓</a>
+    </header>
+
+
+    <main>
+
+        <section class="calculator-section">
+
+            <div class="page-heading">
+                <h1>損益計算</h1>
+                <span class="trade-type">現物取引</span>
+            </div>
+
+
+            <div class="calculator">
+
+
+                <!-- 口座区分 -->
+                <div class="input-group">
+
+                    <label>口座区分</label>
+
+                    <div class="account-buttons">
+
+                        <button
+                            type="button"
+                            class="account-button active"
+                            data-account="taxable"
+                        >
+                            特定・一般
+                        </button>
+
+                        <button
+                            type="button"
+                            class="account-button"
+                            data-account="taxfree"
+                        >
+                            NISA・非課税
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- 購入価格 -->
+                <div class="input-group">
+
+                    <label for="buyPrice">購入価格</label>
+
+                    <div class="input-with-unit">
+
+                        <input
+                            type="number"
+                            id="buyPrice"
+                            min="0"
+                            step="1"
+                            inputmode="decimal"
+                            placeholder="例：1000"
+                        >
+
+                        <span>円</span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- 売却価格 -->
+                <div class="input-group">
+
+                    <label for="sellPrice">売却価格</label>
+
+                    <div class="input-with-unit">
+
+                        <input
+                            type="number"
+                            id="sellPrice"
+                            min="0"
+                            step="1"
+                            inputmode="decimal"
+                            placeholder="例：1200"
+                        >
+
+                        <span>円</span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- 株数 -->
+                <div class="input-group">
+
+                    <label for="sharesCustom">株数</label>
+
+                    <div class="shares-input">
+
+
+                        <!-- 株数選択 -->
+                        <div class="shares-select-wrapper">
+
+                            <select id="sharesSelect">
+
+                                <option value="">—</option>
+
+                                <option value="100">
+                                    100株
+                                </option>
+
+                                <option value="200">
+                                    200株
+                                </option>
+
+                                <option value="300">
+                                    300株
+                                </option>
+
+                                <option value="400">
+                                    400株
+                                </option>
+
+                                <option value="500">
+                                    500株
+                                </option>
+
+                                <option value="600">
+                                    600株
+                                </option>
+
+                                <option value="700">
+                                    700株
+                                </option>
+
+                                <option value="800">
+                                    800株
+                                </option>
+
+                                <option value="900">
+                                    900株
+                                </option>
+
+                                <option value="1000">
+                                    1000株
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- 株数直接入力 -->
+                        <div class="input-with-unit">
+
+                            <input
+                                type="number"
+                                id="sharesCustom"
+                                min="1"
+                                step="1"
+                                inputmode="numeric"
+                                placeholder="例：350"
+                            >
+
+                            <span>株</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- 計算ボタン -->
+                <button
+                    type="button"
+                    id="calculate"
+                    class="calculate-button"
+                >
+                    計算する
+                </button>
+
+
+                <!-- 結果 -->
+                <div class="result">
+
+
+                    <div class="result-main">
+
+                        <span>売却金額</span>
+
+                        <strong id="sellAmount">—</strong>
+
+                    </div>
+
+
+                    <div class="result-row result-rate">
+
+                        <span>損益率</span>
+
+                        <strong id="profitRate">—</strong>
+
+                    </div>
+
+
+                    <div class="result-row result-profit">
+
+                        <span>損益</span>
+
+                        <strong id="profit">—</strong>
+
+                    </div>
+
+
+                    <div class="result-row">
+
+                        <span>買付金額</span>
+
+                        <strong id="buyAmount">—</strong>
+
+                    </div>
+
+
+                    <div
+                        class="result-row"
+                        id="beforeTaxRow"
+                    >
+
+                        <span>税引前損益</span>
+
+                        <strong id="beforeTaxProfit">—</strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer class="site-footer">
+
+        <p>&copy; 2026 かぶ電卓</p>
+
+    </footer>
+
+
+    <script src="../script.js"></script>
+
+</body>
+
+</html>
