@@ -1,7 +1,11 @@
-const calculateButton = document.querySelector("#calculate");
-const accountButtons = document.querySelectorAll(".account-button");
+document.addEventListener("DOMContentLoaded", function() {
+    const calculateButton = document.querySelector("#calculate");
+    const accountButtons = document.querySelectorAll(".account-button");
 
-if (calculateButton) {
+    if (!calculateButton) {
+        return;
+    }
+
     // 初期状態はNISA・非課税
     let accountType = "taxfree";
 
@@ -21,12 +25,15 @@ if (calculateButton) {
         }
     });
 
+    // 初期状態では税引前損益を非表示
     if (beforeTaxRow) {
         beforeTaxRow.style.display = "none";
     }
 
+    // 口座区分の切り替え
     accountButtons.forEach(function(button) {
         button.addEventListener("click", function() {
+
             accountButtons.forEach(function(item) {
                 item.classList.remove("active");
             });
@@ -50,7 +57,9 @@ if (calculateButton) {
     // -------------------------
 
     if (sharesSelect && sharesCustom) {
+
         sharesSelect.addEventListener("change", function() {
+
             if (sharesSelect.value === "") {
                 sharesCustom.value = "";
                 return;
@@ -60,6 +69,7 @@ if (calculateButton) {
         });
 
         sharesCustom.addEventListener("input", function() {
+
             const value = Number(sharesCustom.value);
 
             if (!value) {
@@ -84,6 +94,7 @@ if (calculateButton) {
     // -------------------------
 
     calculateButton.addEventListener("click", function() {
+
         const buyPrice = Number(document.querySelector("#buyPrice").value);
         const sellPrice = Number(document.querySelector("#sellPrice").value);
         const shares = Number(sharesCustom.value);
@@ -105,9 +116,12 @@ if (calculateButton) {
         let afterTaxProfit;
 
         if (accountType === "taxfree") {
+
             // NISA・非課税
             afterTaxProfit = beforeTaxProfit;
+
         } else {
+
             // 特定・一般
             if (beforeTaxProfit > 0) {
                 afterTaxProfit = beforeTaxProfit * (1 - 0.20315);
@@ -142,21 +156,28 @@ if (calculateButton) {
 
         // 税引後損益
         if (afterTaxProfit > 0) {
+
             profitElement.classList.add("positive");
             profitRateElement.classList.add("positive");
+
         } else if (afterTaxProfit < 0) {
+
             profitElement.classList.add("negative");
             profitRateElement.classList.add("negative");
         }
 
         // 税引前損益
         if (beforeTaxProfit > 0) {
+
             beforeTaxElement.classList.add("positive");
+
         } else if (beforeTaxProfit < 0) {
+
             beforeTaxElement.classList.add("negative");
         }
     });
-}
+});
+
 
 // -------------------------
 // 表示用関数
@@ -166,10 +187,12 @@ function formatYen(value) {
     return Math.round(value).toLocaleString() + "円";
 }
 
+
 function formatProfitYen(value) {
     const sign = value > 0 ? "+" : "";
     return sign + Math.round(value).toLocaleString() + "円";
 }
+
 
 function formatPercent(value) {
     const sign = value > 0 ? "+" : "";
