@@ -2,174 +2,176 @@ const calculateButton = document.querySelector("#calculate");
 const accountButtons = document.querySelectorAll(".account-button");
 
 if (calculateButton) {
-// 初期状態はNISA・非課税
-let accountType = "taxfree";
+    // 初期状態はNISA・非課税
+    let accountType = "taxfree";
 
-```
-const beforeTaxRow = document.querySelector("#beforeTaxRow");
-const sharesSelect = document.querySelector("#sharesSelect");
-const sharesCustom = document.querySelector("#sharesCustom");
+    const beforeTaxRow = document.querySelector("#beforeTaxRow");
+    const sharesSelect = document.querySelector("#sharesSelect");
+    const sharesCustom = document.querySelector("#sharesCustom");
 
-// 初期状態の口座区分をNISA・非課税にする
-accountButtons.forEach(function(button) {
-    button.classList.remove("active");
+    // -------------------------
+    // 口座区分
+    // -------------------------
 
-    if (button.dataset.account === "taxfree") {
-        button.classList.add("active");
+    accountButtons.forEach(function(button) {
+        button.classList.remove("active");
+
+        if (button.dataset.account === "taxfree") {
+            button.classList.add("active");
+        }
+    });
+
+    if (beforeTaxRow) {
+        beforeTaxRow.style.display = "none";
     }
-});
 
-if (beforeTaxRow) {
-    beforeTaxRow.style.display = "none";
-}
+    accountButtons.forEach(function(button) {
+        button.addEventListener("click", function() {
+            accountButtons.forEach(function(item) {
+                item.classList.remove("active");
+            });
 
-// 口座区分の切り替え
-accountButtons.forEach(function(button) {
-    button.addEventListener("click", function() {
-        accountButtons.forEach(function(item) {
-            item.classList.remove("active");
+            button.classList.add("active");
+
+            accountType = button.dataset.account;
+
+            if (beforeTaxRow) {
+                if (accountType === "taxfree") {
+                    beforeTaxRow.style.display = "none";
+                } else {
+                    beforeTaxRow.style.display = "flex";
+                }
+            }
+        });
+    });
+
+    // -------------------------
+    // 株数
+    // -------------------------
+
+    if (sharesSelect && sharesCustom) {
+        sharesSelect.addEventListener("change", function() {
+            if (sharesSelect.value === "") {
+                sharesCustom.value = "";
+                return;
+            }
+
+            sharesCustom.value = sharesSelect.value;
         });
 
-        button.classList.add("active");
-        accountType = button.dataset.account;
+        sharesCustom.addEventListener("input", function() {
+            const value = Number(sharesCustom.value);
 
-        if (beforeTaxRow) {
-            if (accountType === "taxfree") {
-                beforeTaxRow.style.display = "none";
+            if (!value) {
+                sharesSelect.value = "";
+                return;
+            }
+
+            const matchingOption = Array.from(sharesSelect.options).find(function(option) {
+                return Number(option.value) === value;
+            });
+
+            if (matchingOption) {
+                sharesSelect.value = matchingOption.value;
             } else {
-                beforeTaxRow.style.display = "flex";
+                sharesSelect.value = "";
+            }
+        });
+    }
+
+    // -------------------------
+    // 計算
+    // -------------------------
+
+    calculateButton.addEventListener("click", function() {
+        const buyPrice = Number(document.querySelector("#buyPrice").value);
+        const sellPrice = Number(document.querySelector("#sellPrice").value);
+        const shares = Number(sharesCustom.value);
+
+        if (buyPrice <= 0 || sellPrice <= 0 || shares <= 0) {
+            alert("購入価格・売却価格・株数を入力してください。");
+            return;
+        }
+
+        // 買付金額
+        const buyAmount = buyPrice * shares;
+
+        // 税引前の売却金額
+        const grossSellAmount = sellPrice * shares;
+
+        // 税引前損益
+        const beforeTaxProfit = grossSellAmount - buyAmount;
+
+        let afterTaxProfit;
+
+        if (accountType === "taxfree") {
+            // NISA・非課税
+            afterTaxProfit = beforeTaxProfit;
+        } else {
+            // 特定・一般
+            if (beforeTaxProfit > 0) {
+                afterTaxProfit = beforeTaxProfit * (1 - 0.20315);
+            } else {
+                afterTaxProfit = beforeTaxProfit;
             }
         }
-    });
-});
 
-// 株数の選択欄と直接入力欄を同期
-if (sharesSelect && sharesCustom) {
-    sharesSelect.addEventListener("change", function() {
-        if (sharesSelect.value === "") {
-            sharesCustom.value = "";
-            return;
-        }
+        // 税引後の実質売却金額
+        const afterTaxSellAmount = buyAmount + afterTaxProfit;
 
-        sharesCustom.value = sharesSelect.value;
-    });
+        // 税引後損益率
+        const profitRate = (afterTaxProfit / buyAmount) * 100;
 
-    sharesCustom.addEventListener("input", function() {
-        const value = Number(sharesCustom.value);
+        const sellAmountElement = document.querySelector("#sellAmount");
+        const buyAmountElement = document.querySelector("#buyAmount");
+        const profitElement = document.querySelector("#profit");
+        const profitRateElement = document.querySelector("#profitRate");
+        const beforeTaxElement = document.querySelector("#beforeTaxProfit");
 
-        if (!value) {
-            sharesSelect.value = "";
-            return;
-        }
+        // 結果表示
+        sellAmountElement.textContent = formatYen(afterTaxSellAmount);
+        buyAmountElement.textContent = formatYen(buyAmount);
+        profitElement.textContent = formatProfitYen(afterTaxProfit);
+        profitRateElement.textContent = formatPercent(profitRate);
+        beforeTaxElement.textContent = formatProfitYen(beforeTaxProfit);
 
-        const matchingOption = Array.from(sharesSelect.options).find(function(option) {
-            return Number(option.value) === value;
-        });
-
-        if (matchingOption) {
-            sharesSelect.value = matchingOption.value;
-        } else {
-            sharesSelect.value = "";
-        }
-    });
-}
-
-// 計算
-calculateButton.addEventListener("click", function() {
-    const buyPrice = Number(document.querySelector("#buyPrice").value);
-    const sellPrice = Number(document.querySelector("#sellPrice").value);
-    const shares = Number(sharesCustom.value);
-
-    if (buyPrice <= 0 || sellPrice <= 0 || shares <= 0) {
-        alert("購入価格・売却価格・株数を入力してください。");
-        return;
-    }
-
-    // 買付金額
-    const buyAmount = buyPrice * shares;
-
-    // 税引前の売却金額
-    const grossSellAmount = sellPrice * shares;
-
-    // 税引前損益
-    const beforeTaxProfit = grossSellAmount - buyAmount;
-
-    let tax = 0;
-    let afterTaxSellAmount;
-    let afterTaxProfit;
-
-    if (accountType === "taxfree") {
-        // NISA・非課税
-        afterTaxSellAmount = grossSellAmount;
-        afterTaxProfit = beforeTaxProfit;
-    } else {
-        // 特定・一般
-        // 利益が出た場合のみ20.315%課税
-        if (beforeTaxProfit > 0) {
-            tax = beforeTaxProfit * 0.20315;
-        }
-
-        // 税金を差し引いた実質的な売却金額
-        afterTaxSellAmount = grossSellAmount - tax;
+        // 色をリセット
+        profitElement.classList.remove("positive", "negative");
+        profitRateElement.classList.remove("positive", "negative");
+        beforeTaxElement.classList.remove("positive", "negative");
 
         // 税引後損益
-        afterTaxProfit = afterTaxSellAmount - buyAmount;
-    }
+        if (afterTaxProfit > 0) {
+            profitElement.classList.add("positive");
+            profitRateElement.classList.add("positive");
+        } else if (afterTaxProfit < 0) {
+            profitElement.classList.add("negative");
+            profitRateElement.classList.add("negative");
+        }
 
-    // 税引後損益率
-    const profitRate = (afterTaxProfit / buyAmount) * 100;
-
-    const sellAmountElement = document.querySelector("#sellAmount");
-    const buyAmountElement = document.querySelector("#buyAmount");
-    const profitElement = document.querySelector("#profit");
-    const profitRateElement = document.querySelector("#profitRate");
-    const beforeTaxElement = document.querySelector("#beforeTaxProfit");
-
-    // 結果を表示
-    sellAmountElement.textContent = formatYen(afterTaxSellAmount);
-    buyAmountElement.textContent = formatYen(buyAmount);
-    profitElement.textContent = formatProfitYen(afterTaxProfit);
-    profitRateElement.textContent = formatPercent(profitRate);
-    beforeTaxElement.textContent = formatProfitYen(beforeTaxProfit);
-
-    // 損益の色をリセット
-    profitElement.classList.remove("positive", "negative");
-    profitRateElement.classList.remove("positive", "negative");
-    beforeTaxElement.classList.remove("positive", "negative");
-
-    // 税引後損益・損益率
-    if (afterTaxProfit > 0) {
-        profitElement.classList.add("positive");
-        profitRateElement.classList.add("positive");
-    } else if (afterTaxProfit < 0) {
-        profitElement.classList.add("negative");
-        profitRateElement.classList.add("negative");
-    }
-
-    // 税引前損益
-    if (beforeTaxProfit > 0) {
-        beforeTaxElement.classList.add("positive");
-    } else if (beforeTaxProfit < 0) {
-        beforeTaxElement.classList.add("negative");
-    }
-});
-```
-
+        // 税引前損益
+        if (beforeTaxProfit > 0) {
+            beforeTaxElement.classList.add("positive");
+        } else if (beforeTaxProfit < 0) {
+            beforeTaxElement.classList.add("negative");
+        }
+    });
 }
 
-// 金額表示
+// -------------------------
+// 表示用関数
+// -------------------------
+
 function formatYen(value) {
-return Math.round(value).toLocaleString() + "円";
+    return Math.round(value).toLocaleString() + "円";
 }
 
-// 損益表示
 function formatProfitYen(value) {
-const sign = value > 0 ? "+" : "";
-return sign + Math.round(value).toLocaleString() + "円";
+    const sign = value > 0 ? "+" : "";
+    return sign + Math.round(value).toLocaleString() + "円";
 }
 
-// パーセント表示
 function formatPercent(value) {
-const sign = value > 0 ? "+" : "";
-return sign + value.toFixed(2) + "%";
+    const sign = value > 0 ? "+" : "";
+    return sign + value.toFixed(2) + "%";
 }
