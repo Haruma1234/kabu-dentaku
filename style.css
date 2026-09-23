@@ -128,11 +128,15 @@ main {
 
 .trade-type {
     display: inline-block;
-
-    color: #666;
-    font-size: 14px;
+    margin-top: 8px;
+    padding: 6px 14px;
+    border: 1px solid #2f6f4e;
+    border-radius: 0;
+    background: #eef5f0;
+    color: #2f6f4e;
+    font-size: 16px;
+    font-weight: 700;
 }
-
 
 /* =========================
    Calculator box
@@ -476,5 +480,77 @@ main {
     .calculator {
         padding: 24px 20px;
     }
+
+}
+/* -------------------------
+   計算機の説明
+------------------------- */
+
+.calculator-intro {
+    max-width: 760px;
+    margin: 0 auto 36px;
+    color: #444;
+    font-size: 15px;
+    line-height: 1.9;
+}
+
+.calculator-intro p {
+    margin: 0 0 16px;
+}
+
+.calculator-intro p:last-child {
+    margin-bottom: 0;
+}
+
+@media (max-width: 600px) {
+    .calculator-intro {
+        margin-bottom: 30px;
+        font-size: 14px;
+        line-height: 1.85;
+    }
+}
+/* -------------------------
+計算機の説明
+------------------------- */
+
+.calculator-description {
+max-width: 760px;
+margin: 52px auto 0;
+padding-top: 28px;
+border-top: 1px solid #dfe3e6;
+color: #444;
+font-size: 15px;
+line-height: 1.9;
+}
+
+.calculator-description h2 {
+margin: 0 0 20px;
+color: #222;
+font-size: 20px;
+font-weight: 700;
+}
+
+.calculator-description p {
+margin: 0 0 18px;
+}
+
+.calculator-description p:last-child {
+margin-bottom: 0;
+}
+
+@media (max-width: 600px) {
+.calculator-description {
+margin-top: 42px;
+padding-top: 24px;
+font-size: 14px;
+line-height: 1.85;
+}
+
+```
+.calculator-description h2 {
+    font-size: 18px;
+    margin-bottom: 16px;
+}
+```
 
 }
