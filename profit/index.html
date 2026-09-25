@@ -52,125 +52,193 @@
             </div>
 
 
-            <div class="calculator">
+            <div class="calculator-workspace">
 
-                <!-- 口座区分 -->
-                <div class="input-group">
+                <!-- =========================
+                     メイン：損益計算
+                     ========================= -->
+                <div class="calculator">
 
-                    <label>口座区分</label>
+                    <!-- 口座区分 -->
+                    <div class="input-group">
 
-                    <div class="account-buttons">
+                        <label>口座区分</label>
 
-                        <button
-                            type="button"
-                            class="account-button active"
-                            data-account="taxable"
-                        >
-                            特定・一般
-                        </button>
+                        <div class="account-buttons">
 
-                        <button
-                            type="button"
-                            class="account-button"
-                            data-account="taxfree"
-                        >
-                            NISA・非課税
-                        </button>
+                            <button
+                                type="button"
+                                class="account-button active"
+                                data-account="taxable"
+                            >
+                                特定・一般
+                            </button>
 
-                    </div>
-
-                </div>
-
-
-                <!-- 購入価格 -->
-                <div class="input-group">
-
-                    <label for="buyPrice">購入価格</label>
-
-                    <div class="input-with-unit">
-
-                        <input
-                            type="number"
-                            id="buyPrice"
-                            min="0"
-                            step="1"
-                            inputmode="decimal"
-                            placeholder="例：1000"
-                        >
-
-                        <span>円</span>
-
-                    </div>
-
-                </div>
-
-
-                <!-- 売却価格 -->
-                <div class="input-group">
-
-                    <label for="sellPrice">売却価格</label>
-
-                    <div class="input-with-unit">
-
-                        <input
-                            type="number"
-                            id="sellPrice"
-                            min="0"
-                            step="1"
-                            inputmode="decimal"
-                            placeholder="例：1200"
-                        >
-
-                        <span>円</span>
-
-                    </div>
-
-                </div>
-
-
-                <!-- 株数 -->
-                <div class="input-group">
-
-                    <label for="sharesCustom">株数</label>
-
-                    <div class="shares-input">
-
-                        <!-- 株数選択 -->
-                        <div class="shares-select-wrapper">
-
-                            <select id="sharesSelect">
-
-                                <option value="">—</option>
-
-                                <option value="100">100株</option>
-                                <option value="200">200株</option>
-                                <option value="300">300株</option>
-                                <option value="400">400株</option>
-                                <option value="500">500株</option>
-                                <option value="600">600株</option>
-                                <option value="700">700株</option>
-                                <option value="800">800株</option>
-                                <option value="900">900株</option>
-                                <option value="1000">1000株</option>
-
-                            </select>
+                            <button
+                                type="button"
+                                class="account-button"
+                                data-account="taxfree"
+                            >
+                                NISA・非課税
+                            </button>
 
                         </div>
 
+                    </div>
 
-                        <!-- 株数直接入力 -->
+
+                    <!-- 購入価格 -->
+                    <div class="input-group">
+
+                        <label for="buyPrice">購入価格</label>
+
                         <div class="input-with-unit">
 
                             <input
                                 type="number"
-                                id="sharesCustom"
-                                min="1"
+                                id="buyPrice"
+                                min="0"
                                 step="1"
-                                inputmode="numeric"
-                                placeholder="例：350"
+                                inputmode="decimal"
+                                placeholder="例：1000"
                             >
 
-                            <span>株</span>
+                            <span>円</span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- 売却価格 -->
+                    <div class="input-group">
+
+                        <label for="sellPrice">売却価格</label>
+
+                        <div class="input-with-unit">
+
+                            <input
+                                type="number"
+                                id="sellPrice"
+                                min="0"
+                                step="1"
+                                inputmode="decimal"
+                                placeholder="例：1200"
+                            >
+
+                            <span>円</span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- 株数 -->
+                    <div class="input-group">
+
+                        <label for="sharesCustom">株数</label>
+
+                        <div class="shares-input">
+
+                            <div class="shares-select-wrapper">
+
+                                <select id="sharesSelect">
+
+                                    <option value="">—</option>
+
+                                    <option value="100">100株</option>
+                                    <option value="200">200株</option>
+                                    <option value="300">300株</option>
+                                    <option value="400">400株</option>
+                                    <option value="500">500株</option>
+                                    <option value="600">600株</option>
+                                    <option value="700">700株</option>
+                                    <option value="800">800株</option>
+                                    <option value="900">900株</option>
+                                    <option value="1000">1000株</option>
+
+                                </select>
+
+                            </div>
+
+
+                            <div class="input-with-unit">
+
+                                <input
+                                    type="number"
+                                    id="sharesCustom"
+                                    min="1"
+                                    step="1"
+                                    inputmode="numeric"
+                                    placeholder="例：350"
+                                >
+
+                                <span>株</span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- 計算ボタン -->
+                    <button
+                        type="button"
+                        id="calculate"
+                        class="calculate-button"
+                    >
+                        計算する
+                    </button>
+
+
+                    <!-- 結果 -->
+                    <div class="result">
+
+                        <div class="result-main">
+
+                            <span>売却金額</span>
+
+                            <strong id="sellAmount">—</strong>
+
+                        </div>
+
+
+                        <div class="result-row result-rate">
+
+                            <span>損益率</span>
+
+                            <strong id="profitRate">—</strong>
+
+                        </div>
+
+
+                        <div class="result-row result-profit">
+
+                            <span>損益</span>
+
+                            <strong id="profit">—</strong>
+
+                        </div>
+
+
+                        <div class="result-row">
+
+                            <span>買付金額</span>
+
+                            <strong id="buyAmount">—</strong>
+
+                        </div>
+
+
+                        <div
+                            class="result-row"
+                            id="beforeTaxRow"
+                        >
+
+                            <span>税引前損益</span>
+
+                            <strong id="beforeTaxProfit">—</strong>
 
                         </div>
 
@@ -179,73 +247,87 @@
                 </div>
 
 
-                <!-- 計算ボタン -->
-                <button
-                    type="button"
-                    id="calculate"
-                    class="calculate-button"
-                >
-                    計算する
-                </button>
+                <!-- =========================
+                     サブ：電卓・メモ
+                     ========================= -->
+                <aside class="utility-tools">
+
+                    <!-- 電卓 -->
+                    <section class="utility-panel calculator-tool">
+
+                        <h2>電卓</h2>
+
+                        <div class="calculator-display">
+                            <input
+                                type="text"
+                                id="calcDisplay"
+                                value="0"
+                                readonly
+                                aria-label="電卓の表示"
+                            >
+                        </div>
 
 
-                <!-- 結果 -->
-                <div class="result">
+                        <div class="calculator-buttons">
 
-                    <div class="result-main">
+                            <button type="button" data-calc-action="clear">C</button>
+                            <button type="button" data-calc-action="operator" data-value="/">÷</button>
+                            <button type="button" data-calc-action="operator" data-value="*">×</button>
+                            <button type="button" data-calc-action="operator" data-value="-">−</button>
 
-                        <span>売却金額</span>
+                            <button type="button" data-calc-action="number" data-value="7">7</button>
+                            <button type="button" data-calc-action="number" data-value="8">8</button>
+                            <button type="button" data-calc-action="number" data-value="9">9</button>
+                            <button type="button" data-calc-action="operator" data-value="+">＋</button>
 
-                        <strong id="sellAmount">—</strong>
+                            <button type="button" data-calc-action="number" data-value="4">4</button>
+                            <button type="button" data-calc-action="number" data-value="5">5</button>
+                            <button type="button" data-calc-action="number" data-value="6">6</button>
+                            <button type="button" data-calc-action="number" data-value="0">0</button>
 
-                    </div>
+                            <button type="button" data-calc-action="number" data-value="1">1</button>
+                            <button type="button" data-calc-action="number" data-value="2">2</button>
+                            <button type="button" data-calc-action="number" data-value="3">3</button>
+                            <button type="button" data-calc-action="decimal">.</button>
 
+                            <button
+                                type="button"
+                                class="calculator-equals"
+                                data-calc-action="equals"
+                            >
+                                =
+                            </button>
 
-                    <div class="result-row result-rate">
+                        </div>
 
-                        <span>損益率</span>
-
-                        <strong id="profitRate">—</strong>
-
-                    </div>
-
-
-                    <div class="result-row result-profit">
-
-                        <span>損益</span>
-
-                        <strong id="profit">—</strong>
-
-                    </div>
-
-
-                    <div class="result-row">
-
-                        <span>買付金額</span>
-
-                        <strong id="buyAmount">—</strong>
-
-                    </div>
+                    </section>
 
 
-                    <div
-                        class="result-row"
-                        id="beforeTaxRow"
-                    >
+                    <!-- メモ -->
+                    <section class="utility-panel memo-tool">
 
-                        <span>税引前損益</span>
+                        <h2>メモ</h2>
 
-                        <strong id="beforeTaxProfit">—</strong>
+                        <textarea
+                            id="memo"
+                            placeholder="ここにメモできます。"
+                            aria-label="メモ"
+                        ></textarea>
 
-                    </div>
+                        <p class="memo-status" id="memoStatus">
+                            自動保存
+                        </p>
 
-                </div>
+                    </section>
+
+                </aside>
 
             </div>
 
 
             <!-- 損益計算について -->
             <section class="calculator-description">
+
                 <h2>損益計算について</h2>
 
                 <p>
@@ -259,6 +341,7 @@
                 <p>
                     損益、損益率、買付金額、売却金額を表示します。
                 </p>
+
             </section>
 
         </section>
@@ -281,4 +364,4 @@
 
 </body>
 
-</html> 
+</html>

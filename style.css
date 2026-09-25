@@ -111,8 +111,8 @@ main {
 ========================= */
 
 .calculator-section {
-    max-width: 720px;
-    margin: 0 auto;
+    width: 100%;
+    max-width: none;
 }
 
 .page-heading {
@@ -514,24 +514,30 @@ main {
 ------------------------- */
 
 .calculator-description {
-max-width: 760px;
-margin: 52px auto 0;
-padding-top: 28px;
-border-top: 1px solid #dfe3e6;
-color: #444;
-font-size: 15px;
-line-height: 1.9;
+    width: 100%;
+    max-width: none;
+    margin: 52px 0 0;
+    padding-top: 28px;
+    border-top: 1px solid #dfe3e6;
+    color: #444;
+    font-size: 15px;
+    line-height: 1.9;
+}
+
+.calculator-description h2,
+.calculator-description p {
+    max-width: 900px;
 }
 
 .calculator-description h2 {
-margin: 0 0 20px;
-color: #222;
-font-size: 20px;
-font-weight: 700;
+    margin: 0 0 20px;
+    color: #222;
+    font-size: 20px;
+    font-weight: 700;
 }
 
 .calculator-description p {
-margin: 0 0 18px;
+    margin: 0 0 18px;
 }
 
 .calculator-description p:last-child {
@@ -552,5 +558,226 @@ line-height: 1.85;
     margin-bottom: 16px;
 }
 ```
+
+}
+
+/* 未実装ツール */
+.tool-card-disabled {
+    background: #ffffff;
+    border: 2px solid #2f6f4e;
+    color: #2f6f4e;
+    cursor: default;
+    transition: none;
+}
+
+.tool-card-disabled h2 {
+    color: #2f6f4e;
+}
+
+
+/* 未実装ツールはホバーしても変化しない */
+.tool-card-disabled:hover {
+    background: #ffffff;
+    border-color: #2f6f4e;
+    color: #2f6f4e;
+    transform: none;
+    box-shadow: none;
+}
+
+.tool-card-disabled:hover h2 {
+    color: #2f6f4e;
+}
+
+
+/* 実装予定のお知らせ */
+.tools-notice {
+    margin-top: 32px;
+    text-align: center;
+}
+
+.tools-notice p {
+    margin: 0;
+    color: #555;
+    font-size: 14px;
+}
+
+/* ========================================
+   損益計算ページ：作業スペース
+   ======================================== */
+
+.calculator-workspace {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 280px;
+    gap: 40px;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    align-items: start;
+}
+
+.calculator-workspace > .calculator {
+    width: 100%;
+    max-width: none;
+    box-sizing: border-box;
+}
+
+.calculator-workspace > .calculator {
+    width: 100%;
+    max-width: none;
+    box-sizing: border-box;
+}
+
+/* ========================================
+   サブツール
+   ======================================== */
+
+.utility-tools {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+
+.utility-panel {
+    border-top: 2px solid #222;
+    padding-top: 18px;
+}
+
+
+.utility-panel h2 {
+    margin: 0 0 14px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #222;
+}
+
+
+/* ========================================
+   電卓
+   ======================================== */
+
+.calculator-display {
+    margin-bottom: 10px;
+}
+
+
+.calculator-display input {
+    width: 100%;
+    height: 52px;
+    padding: 0 12px;
+    border: 1px solid #cfd4d9;
+    border-radius: 0;
+    background: #fff;
+    color: #222;
+    font-size: 22px;
+    font-weight: 600;
+    text-align: right;
+    outline: none;
+    box-sizing: border-box;
+}
+
+
+.calculator-buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+}
+
+
+.calculator-buttons button {
+    height: 48px;
+    border: 1px solid #cfd4d9;
+    border-radius: 0;
+    background: #fff;
+    color: #222;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+
+.calculator-buttons button:hover {
+    background: #f1f3f4;
+}
+
+
+.calculator-buttons button:active {
+    background: #e7e9eb;
+}
+
+
+.calculator-buttons .calculator-equals {
+    grid-column: 1 / -1;
+    background: #2f6f4e;
+    border-color: #2f6f4e;
+    color: #fff;
+}
+
+
+.calculator-buttons .calculator-equals:hover {
+    background: #2f6f4e;
+}
+
+
+/* ========================================
+   メモ
+   ======================================== */
+
+.memo-tool textarea {
+    width: 100%;
+    min-height: 220px;
+    padding: 12px;
+    border: 1px solid #cfd4d9;
+    border-radius: 0;
+    background: #fff;
+    color: #222;
+    font-family: inherit;
+    font-size: 15px;
+    line-height: 1.7;
+    resize: vertical;
+    outline: none;
+    box-sizing: border-box;
+}
+
+
+.memo-tool textarea:focus {
+    border-color: #2f6f4e;
+}
+
+
+.memo-status {
+    margin: 7px 0 0;
+    color: #777;
+    font-size: 12px;
+    text-align: right;
+}
+
+
+/* ========================================
+   スマートフォン
+   ======================================== */
+
+@media (max-width: 768px) {
+
+    .calculator-workspace {
+        grid-template-columns: 1fr;
+        gap: 48px;
+    }
+
+
+    .utility-tools {
+        gap: 40px;
+    }
+
+
+    .calculator-buttons button {
+        height: 52px;
+    }
+
+
+    .memo-tool textarea {
+        min-height: 180px;
+    }
 
 }
