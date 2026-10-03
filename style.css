@@ -15,7 +15,6 @@ body {
     color: #222;
 }
 
-
 /* =========================
    Header
 ========================= */
@@ -27,18 +26,14 @@ body {
 
 .logo {
     display: block;
-
     max-width: 1100px;
     margin: 0 auto;
     padding: 22px 24px;
-
     color: #222;
     text-decoration: none;
-
     font-size: 24px;
     font-weight: 700;
 }
-
 
 /* =========================
    Main
@@ -47,10 +42,8 @@ body {
 main {
     max-width: 1100px;
     margin: 0 auto;
-
     padding: 60px 24px 100px;
 }
-
 
 /* =========================
    Top page
@@ -58,53 +51,39 @@ main {
 
 .tools-section h1 {
     margin: 0 0 32px;
-
     font-size: 30px;
     font-weight: 700;
 }
 
 .tool-grid {
     display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
+    grid-template-columns: repeat(3, 1fr);
     gap: 18px;
 }
 
 .tool-card {
     display: flex;
     align-items: center;
-
     min-height: 140px;
     padding: 24px;
-
     background: #2f6f4e;
     border: 1px solid #2f6f4e;
     border-radius: 0;
-
     color: #ffffff;
     text-decoration: none;
-
-    transition:
-        background-color 0.15s ease,
-        transform 0.15s ease;
+    transition: background-color 0.15s ease, transform 0.15s ease;
 }
 
 .tool-card h2 {
     margin: 0;
-
     font-size: 19px;
     font-weight: 600;
 }
 
 .tool-card:hover {
     background: #255a3f;
-
-    transform:
-        translateY(-2px);
+    transform: translateY(-2px);
 }
-
 
 /* =========================
    Calculator
@@ -121,7 +100,6 @@ main {
 
 .page-heading h1 {
     margin: 0 0 8px;
-
     font-size: 32px;
     font-weight: 700;
 }
@@ -144,11 +122,9 @@ main {
 
 .calculator {
     padding: 34px;
-
     background: #ffffff;
     border: 1px solid #e1e4e8;
 }
-
 
 /* =========================
    Input
@@ -160,11 +136,8 @@ main {
 
 .input-group label {
     display: block;
-
     margin-bottom: 9px;
-
     color: #333;
-
     font-size: 14px;
     font-weight: 600;
 }
@@ -172,24 +145,18 @@ main {
 .input-with-unit {
     display: flex;
     align-items: center;
-
     gap: 10px;
 }
 
 .input-with-unit input {
     width: 100%;
     height: 48px;
-
     padding: 0 14px;
-
     border: 1px solid #cfd4d9;
     border-radius: 0;
-
     background: #ffffff;
     color: #222;
-
     font-size: 16px;
-
     outline: none;
 }
 
@@ -199,11 +166,9 @@ main {
 
 .input-with-unit span {
     flex-shrink: 0;
-
     color: #555;
     font-size: 14px;
 }
-
 
 /* =========================
    Account buttons
@@ -211,23 +176,17 @@ main {
 
 .account-buttons {
     display: grid;
-
-    grid-template-columns:
-        1fr 1fr;
+    grid-template-columns: 1fr 1fr;
 }
 
 .account-button {
     height: 48px;
-
     border: 1px solid #cfd4d9;
     border-radius: 0;
-
     background: #ffffff;
     color: #333;
-
     font-size: 15px;
     font-weight: 600;
-
     cursor: pointer;
 }
 
@@ -238,10 +197,8 @@ main {
 .account-button.active {
     background: #2f6f4e;
     border-color: #2f6f4e;
-
     color: #ffffff;
 }
-
 
 /* =========================
    Shares input
@@ -252,80 +209,56 @@ main {
     align-items: center;
 }
 
-
-/* 株数選択 */
-
 .shares-select-wrapper {
     position: relative;
-
     width: 33.333%;
 }
 
 .shares-select-wrapper::after {
     content: "";
-
     position: absolute;
-
     top: 50%;
     right: 14px;
-
     width: 6px;
     height: 6px;
-
     border-right: 1px solid #555;
     border-bottom: 1px solid #555;
-
-    transform:
-        translateY(-65%)
-        rotate(45deg);
-
+    transform: translateY(-65%) rotate(45deg);
     pointer-events: none;
 }
 
 .shares-select-wrapper select {
     appearance: none;
     -webkit-appearance: none;
-
     width: 100%;
     height: 48px;
-
     padding: 0 32px 0 14px;
-
     border: 1px solid #cfd4d9;
     border-right: none;
     border-radius: 0;
-
     background: #ffffff;
     color: #222;
-
     font-family: inherit;
     font-size: 16px;
     font-weight: 500;
-
     cursor: pointer;
     outline: none;
 }
 
 .shares-select-wrapper select:focus {
     border-color: #2f6f4e;
-
     position: relative;
     z-index: 1;
 }
 
-
-/* 株数直接入力 */
-
 .shares-input .input-with-unit {
     flex: 1;
-
     gap: 10px;
 }
 
 .shares-input .input-with-unit input {
     height: 48px;
 }
-
 
 /* =========================
    Calculate button
@@ -334,18 +267,13 @@ main {
 .calculate-button {
     width: 100%;
     height: 52px;
-
     margin-top: 8px;
-
     border: none;
     border-radius: 0;
-
     background: #222;
     color: #ffffff;
-
     font-size: 16px;
     font-weight: 600;
-
     cursor: pointer;
 }
 
@@ -353,35 +281,29 @@ main {
     background: #333;
 }
 
-
 /* =========================
    Result
 ========================= */
 
 .result {
     margin-top: 32px;
-
     border-top: 2px solid #222;
 }
 
 .result-main {
     padding: 24px 0 28px;
-
     border-bottom: 1px solid #e5e7eb;
 }
 
 .result-main span {
     display: block;
-
     margin-bottom: 8px;
-
     color: #555;
     font-size: 14px;
 }
 
 .result-main strong {
     display: block;
-
     font-size: 38px;
     line-height: 1.2;
     font-weight: 700;
@@ -391,9 +313,7 @@ main {
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     padding: 18px 0;
-
     border-bottom: 1px solid #e5e7eb;
 }
 
@@ -426,62 +346,18 @@ main {
     font-weight: 700;
 }
 
-
 /* =========================
    Footer
 ========================= */
 
 .site-footer {
     padding: 30px 24px;
-
     border-top: 1px solid #e5e7eb;
-
     text-align: center;
-
     color: #777;
     font-size: 13px;
 }
 
-
-/* =========================
-   Mobile
-========================= */
-
-@media (max-width: 700px) {
-
-    main {
-        padding: 40px 18px 70px;
-    }
-
-    .logo {
-        padding: 18px;
-    }
-
-    .tools-section h1 {
-        font-size: 26px;
-    }
-
-    .tool-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .tool-card {
-        min-height: 100px;
-    }
-
-    .calculator-section {
-        max-width: none;
-    }
-
-    .page-heading h1 {
-        font-size: 28px;
-    }
-
-    .calculator {
-        padding: 24px 20px;
-    }
-
-}
 /* -------------------------
    計算機の説明
 ------------------------- */
@@ -501,17 +377,6 @@ main {
 .calculator-intro p:last-child {
     margin-bottom: 0;
 }
-
-@media (max-width: 600px) {
-    .calculator-intro {
-        margin-bottom: 30px;
-        font-size: 14px;
-        line-height: 1.85;
-    }
-}
-/* -------------------------
-計算機の説明
-------------------------- */
 
 .calculator-description {
     width: 100%;
@@ -541,24 +406,7 @@ main {
 }
 
 .calculator-description p:last-child {
-margin-bottom: 0;
-}
-
-@media (max-width: 600px) {
-.calculator-description {
-margin-top: 42px;
-padding-top: 24px;
-font-size: 14px;
-line-height: 1.85;
-}
-
-```
-.calculator-description h2 {
-    font-size: 18px;
-    margin-bottom: 16px;
-}
-```
-
+    margin-bottom: 0;
 }
 
 /* 未実装ツール */
@@ -574,8 +422,6 @@ line-height: 1.85;
     color: #2f6f4e;
 }
 
-
-/* 未実装ツールはホバーしても変化しない */
 .tool-card-disabled:hover {
     background: #ffffff;
     border-color: #2f6f4e;
@@ -588,8 +434,6 @@ line-height: 1.85;
     color: #2f6f4e;
 }
 
-
-/* 実装予定のお知らせ */
 .tools-notice {
     margin-top: 32px;
     text-align: center;
@@ -602,7 +446,7 @@ line-height: 1.85;
 }
 
 /* ========================================
-   損益計算ページ：作業スペース
+   作業スペース
    ======================================== */
 
 .calculator-workspace {
@@ -621,12 +465,6 @@ line-height: 1.85;
     box-sizing: border-box;
 }
 
-.calculator-workspace > .calculator {
-    width: 100%;
-    max-width: none;
-    box-sizing: border-box;
-}
-
 /* ========================================
    サブツール
    ======================================== */
@@ -637,12 +475,10 @@ line-height: 1.85;
     gap: 28px;
 }
 
-
 .utility-panel {
     border-top: 2px solid #222;
     padding-top: 18px;
 }
-
 
 .utility-panel h2 {
     margin: 0 0 14px;
@@ -651,15 +487,13 @@ line-height: 1.85;
     color: #222;
 }
 
-
 /* ========================================
-   電卓
+   電卓（最適化版）
    ======================================== */
 
 .calculator-display {
     margin-bottom: 10px;
 }
-
 
 .calculator-display input {
     width: 100%;
@@ -676,13 +510,11 @@ line-height: 1.85;
     box-sizing: border-box;
 }
 
-
 .calculator-buttons {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 6px;
+    gap: 8px;
 }
-
 
 .calculator-buttons button {
     height: 48px;
@@ -696,29 +528,23 @@ line-height: 1.85;
     cursor: pointer;
 }
 
-
 .calculator-buttons button:hover {
     background: #f1f3f4;
 }
-
 
 .calculator-buttons button:active {
     background: #e7e9eb;
 }
 
-
 .calculator-buttons .calculator-equals {
-    grid-column: 1 / -1;
     background: #2f6f4e;
     border-color: #2f6f4e;
     color: #fff;
 }
 
-
 .calculator-buttons .calculator-equals:hover {
-    background: #2f6f4e;
+    background: #255a3f;
 }
-
 
 /* ========================================
    メモ
@@ -740,44 +566,150 @@ line-height: 1.85;
     box-sizing: border-box;
 }
 
-
 .memo-tool textarea:focus {
     border-color: #2f6f4e;
 }
 
-
 .memo-status {
-    margin: 7px 0 0;
+    margin: 0;
     color: #777;
     font-size: 12px;
-    text-align: right;
 }
 
+.memo-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 8px;
+}
 
-/* ========================================
-   スマートフォン
-   ======================================== */
+.memo-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.memo-heading h2 {
+    margin: 0 0 14px;
+}
+
+.memo-clear-button {
+    margin: 0 0 14px;
+    padding: 6px 10px;
+    border: 1px solid #cfd4d9;
+    background: #fff;
+    color: #777;
+    font-family: inherit;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.memo-clear-button:hover {
+    color: #b42318;
+}
+
+/* =========================
+   計算モード
+   ========================= */
+
+.calculation-modes {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+    border-bottom: 1px solid #cfd4d9;
+}
+
+.calculation-mode {
+    flex: 1;
+    min-width: 150px;
+    height: 48px;
+    padding: 0 12px;
+    border: none;
+    border-bottom: 2px solid transparent;
+    border-radius: 0;
+    background: #fff;
+    color: #666;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.calculation-mode.active {
+    border-bottom-color: #2f6f4e;
+    color: #2f6f4e;
+}
+
+/* =========================
+   モバイル調整
+   ========================= */
 
 @media (max-width: 768px) {
+    main {
+        padding: 40px 18px 70px;
+    }
+
+    .logo {
+        padding: 18px;
+    }
+
+    .tools-section h1 {
+        font-size: 26px;
+    }
+
+    .tool-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tool-card {
+        min-height: 100px;
+    }
+
+    .page-heading h1 {
+        font-size: 28px;
+    }
+
+    .calculator {
+        padding: 24px 20px;
+    }
 
     .calculator-workspace {
         grid-template-columns: 1fr;
         gap: 48px;
     }
 
-
     .utility-tools {
         gap: 40px;
     }
-
 
     .calculator-buttons button {
         height: 52px;
     }
 
-
     .memo-tool textarea {
         min-height: 180px;
     }
 
+    .calculation-description {
+        margin-top: 42px;
+        padding-top: 24px;
+        font-size: 14px;
+        line-height: 1.85;
+    }
+
+    .calculation-description h2 {
+        font-size: 18px;
+        margin-bottom: 16px;
+    }
+
+    .calculation-modes {
+        margin-bottom: 28px;
+    }
+
+    .calculation-mode {
+        height: 46px;
+        font-size: 14px;
+    }
 }

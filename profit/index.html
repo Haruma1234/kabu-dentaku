@@ -8,7 +8,6 @@
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-
         gtag('config', 'G-V0Z3D5GNX5');
     </script>
 
@@ -18,7 +17,6 @@
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-
         gtag('config', 'G-W8XJ742LCZ');
     </script>
 
@@ -29,15 +27,14 @@
 
     <meta
         name="description"
-        content="株の購入価格、売却価格、株数から損益額と損益率を計算できます。"
+        content="株の損益計算、目標損益率または目標損益額から必要な売却時株価を計算できます。"
     >
 
     <link rel="stylesheet" href="../style.css">
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7074374760590472"
-     crossorigin="anonymous">
+        crossorigin="anonymous">
     </script>
-    
 </head>
 
 <body>
@@ -46,9 +43,7 @@
         <a href="../index.html" class="logo">かぶ電卓</a>
     </header>
 
-
     <main>
-
         <section class="calculator-section">
 
             <div class="page-heading">
@@ -56,287 +51,357 @@
                 <span class="trade-type">現物取引</span>
             </div>
 
-
             <div class="calculator-workspace">
 
-                <!-- =========================
-                     メイン：損益計算
-                     ========================= -->
                 <div class="calculator">
 
-                    <!-- 口座区分 -->
-                    <div class="input-group">
+                    <div class="calculation-modes">
+                        <button type="button" class="calculation-mode active" data-mode="profit">
+                            損益を計算
+                        </button>
 
-                        <label>口座区分</label>
+                        <button type="button" class="calculation-mode" data-mode="target">
+                            目標損益率から計算
+                        </button>
 
-                        <div class="account-buttons">
-
-                            <button
-                                type="button"
-                                class="account-button active"
-                                data-account="taxable"
-                            >
-                                特定・一般
-                            </button>
-
-                            <button
-                                type="button"
-                                class="account-button"
-                                data-account="taxfree"
-                            >
-                                NISA・非課税
-                            </button>
-
-                        </div>
-
+                        <button type="button" class="calculation-mode" data-mode="targetAmount">
+                            目標損益額から計算
+                        </button>
                     </div>
 
+                    <!-- 損益を計算 -->
+                    <div class="calculation-panel" id="profitMode">
 
-                    <!-- 購入価格 -->
-                    <div class="input-group">
-
-                        <label for="buyPrice">購入価格</label>
-
-                        <div class="input-with-unit">
-
-                            <input
-                                type="number"
-                                id="buyPrice"
-                                min="0"
-                                step="1"
-                                inputmode="decimal"
-                                placeholder="例：1000"
-                            >
-
-                            <span>円</span>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- 売却価格 -->
-                    <div class="input-group">
-
-                        <label for="sellPrice">売却価格</label>
-
-                        <div class="input-with-unit">
-
-                            <input
-                                type="number"
-                                id="sellPrice"
-                                min="0"
-                                step="1"
-                                inputmode="decimal"
-                                placeholder="例：1200"
-                            >
-
-                            <span>円</span>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- 株数 -->
-                    <div class="input-group">
-
-                        <label for="sharesCustom">株数</label>
-
-                        <div class="shares-input">
-
-                            <div class="shares-select-wrapper">
-
-                                <select id="sharesSelect">
-
-                                    <option value="">—</option>
-
-                                    <option value="100">100株</option>
-                                    <option value="200">200株</option>
-                                    <option value="300">300株</option>
-                                    <option value="400">400株</option>
-                                    <option value="500">500株</option>
-                                    <option value="600">600株</option>
-                                    <option value="700">700株</option>
-                                    <option value="800">800株</option>
-                                    <option value="900">900株</option>
-                                    <option value="1000">1000株</option>
-
-                                </select>
-
+                        <div class="input-group">
+                            <label>口座区分</label>
+                            <div class="account-buttons">
+                                <button type="button" class="account-button active" data-account="taxable">
+                                    特定・一般
+                                </button>
+                                <button type="button" class="account-button" data-account="taxfree">
+                                    NISA・非課税
+                                </button>
                             </div>
+                        </div>
 
-
+                        <div class="input-group">
+                            <label for="buyPrice">購入時株価（取得単価）</label>
                             <div class="input-with-unit">
+                                <input type="number" id="buyPrice" min="0" step="1" inputmode="decimal" placeholder="例：1000">
+                                <span>円</span>
+                            </div>
+                        </div>
 
-                                <input
-                                    type="number"
-                                    id="sharesCustom"
-                                    min="1"
-                                    step="1"
-                                    inputmode="numeric"
-                                    placeholder="例：350"
-                                >
+                        <div class="input-group">
+                            <label for="sellPrice">売却時株価</label>
+                            <div class="input-with-unit">
+                                <input type="number" id="sellPrice" min="0" step="1" inputmode="decimal" placeholder="例：1200">
+                                <span>円</span>
+                            </div>
+                        </div>
 
-                                <span>株</span>
+                        <div class="input-group">
+                            <label for="sharesCustom">株数</label>
+                            <div class="shares-input">
+                                <div class="shares-select-wrapper">
+                                    <select id="sharesSelect">
+                                        <option value="">—</option>
+                                        <option value="100">100株</option>
+                                        <option value="200">200株</option>
+                                        <option value="300">300株</option>
+                                        <option value="400">400株</option>
+                                        <option value="500">500株</option>
+                                        <option value="600">600株</option>
+                                        <option value="700">700株</option>
+                                        <option value="800">800株</option>
+                                        <option value="900">900株</option>
+                                        <option value="1000">1000株</option>
+                                    </select>
+                                </div>
 
+                                <div class="input-with-unit">
+                                    <input type="number" id="sharesCustom" min="1" step="1" inputmode="numeric" placeholder="例：350">
+                                    <span>株</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="button" id="calculate" class="calculate-button">
+                            計算する
+                        </button>
+
+                        <div class="result">
+                            <div class="result-main">
+                                <span>売却金額</span>
+                                <strong id="sellAmount">—</strong>
                             </div>
 
-                        </div>
+                            <div class="result-row result-rate">
+                                <span>損益率</span>
+                                <strong id="profitRate">—</strong>
+                            </div>
 
+                            <div class="result-row result-profit">
+                                <span>損益</span>
+                                <strong id="profit">—</strong>
+                            </div>
+
+                            <div class="result-row">
+                                <span>買付金額</span>
+                                <strong id="buyAmount">—</strong>
+                            </div>
+
+                            <div class="result-row" id="beforeTaxRow">
+                                <span>税引前損益</span>
+                                <strong id="beforeTaxProfit">—</strong>
+                            </div>
+                        </div>
                     </div>
 
+                    <!-- 目標損益率から計算 -->
+                    <div class="calculation-panel" id="targetMode" style="display: none;">
 
-                    <!-- 計算ボタン -->
-                    <button
-                        type="button"
-                        id="calculate"
-                        class="calculate-button"
-                    >
-                        計算する
-                    </button>
-
-
-                    <!-- 結果 -->
-                    <div class="result">
-
-                        <div class="result-main">
-
-                            <span>売却金額</span>
-
-                            <strong id="sellAmount">—</strong>
-
+                        <div class="input-group">
+                            <label>口座区分</label>
+                            <div class="account-buttons">
+                                <button type="button" class="account-button target-account-button active" data-target-account="taxable">
+                                    特定・一般
+                                </button>
+                                <button type="button" class="account-button target-account-button" data-target-account="taxfree">
+                                    NISA・非課税
+                                </button>
+                            </div>
                         </div>
 
-
-                        <div class="result-row result-rate">
-
-                            <span>損益率</span>
-
-                            <strong id="profitRate">—</strong>
-
+                        <div class="input-group">
+                            <label for="targetBuyPrice">購入時株価（取得単価）</label>
+                            <div class="input-with-unit">
+                                <input type="number" id="targetBuyPrice" min="0" step="1" inputmode="decimal" placeholder="例：1000">
+                                <span>円</span>
+                            </div>
                         </div>
 
-
-                        <div class="result-row result-profit">
-
-                            <span>損益</span>
-
-                            <strong id="profit">—</strong>
-
+                        <div class="input-group">
+                            <label for="targetProfitRate">目標損益率</label>
+                            <div class="input-with-unit">
+                                <input type="number" id="targetProfitRate" min="1" max="1000" step="1" inputmode="decimal" placeholder="例：20">
+                                <span>%</span>
+                            </div>
                         </div>
 
+                        <div class="input-group">
+                            <label for="targetShares">株数</label>
+                            <div class="shares-input">
+                                <div class="shares-select-wrapper">
+                                    <select id="targetSharesSelect">
+                                        <option value="">—</option>
+                                        <option value="100">100株</option>
+                                        <option value="200">200株</option>
+                                        <option value="300">300株</option>
+                                        <option value="400">400株</option>
+                                        <option value="500">500株</option>
+                                        <option value="600">600株</option>
+                                        <option value="700">700株</option>
+                                        <option value="800">800株</option>
+                                        <option value="900">900株</option>
+                                        <option value="1000">1000株</option>
+                                    </select>
+                                </div>
 
-                        <div class="result-row">
-
-                            <span>買付金額</span>
-
-                            <strong id="buyAmount">—</strong>
-
+                                <div class="input-with-unit">
+                                    <input type="number" id="targetShares" min="1" step="1" inputmode="numeric" placeholder="例：350">
+                                    <span>株</span>
+                                </div>
+                            </div>
                         </div>
 
+                        <button type="button" id="calculateTarget" class="calculate-button">
+                            計算する
+                        </button>
 
-                        <div
-                            class="result-row"
-                            id="beforeTaxRow"
-                        >
+                        <div class="result">
+                            <div class="result-main">
+                                <span>株価</span>
+                                <strong id="targetSellPrice">—</strong>
+                            </div>
 
-                            <span>税引前損益</span>
+                            <div class="result-row">
+                                <span>売却金額</span>
+                                <strong id="targetSellAmount">—</strong>
+                            </div>
 
-                            <strong id="beforeTaxProfit">—</strong>
+                            <div class="result-row result-rate">
+                                <span>目標損益率</span>
+                                <strong id="targetRateResult">—</strong>
+                            </div>
 
+                            <div class="result-row result-profit">
+                                <span>損益</span>
+                                <strong id="targetProfit">—</strong>
+                            </div>
+
+                            <div class="result-row" id="targetBeforeTaxRow">
+                                <span>税引前損益</span>
+                                <strong id="targetBeforeTaxProfit">—</strong>
+                            </div>
                         </div>
-
                     </div>
 
+                    <!-- 目標損益額から計算 -->
+                    <div class="calculation-panel" id="targetAmountMode" style="display: none;">
+
+                        <div class="input-group">
+                            <label>口座区分</label>
+                            <div class="account-buttons">
+                                <button type="button" class="account-button amount-account-button active" data-amount-account="taxable">
+                                    特定・一般
+                                </button>
+                                <button type="button" class="account-button amount-account-button" data-amount-account="taxfree">
+                                    NISA・非課税
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="amountBuyPrice">購入時株価（取得単価）</label>
+                            <div class="input-with-unit">
+                                <input type="number" id="amountBuyPrice" min="0" step="1" inputmode="decimal" placeholder="例：1000">
+                                <span>円</span>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="targetProfitAmount">目標損益額</label>
+                            <div class="input-with-unit">
+                                <input type="number" id="targetProfitAmount" step="1" inputmode="decimal" placeholder="例：10000">
+                                <span>円</span>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="amountShares">株数</label>
+                            <div class="shares-input">
+                                <div class="shares-select-wrapper">
+                                    <select id="amountSharesSelect">
+                                        <option value="">—</option>
+                                        <option value="100">100株</option>
+                                        <option value="200">200株</option>
+                                        <option value="300">300株</option>
+                                        <option value="400">400株</option>
+                                        <option value="500">500株</option>
+                                        <option value="600">600株</option>
+                                        <option value="700">700株</option>
+                                        <option value="800">800株</option>
+                                        <option value="900">900株</option>
+                                        <option value="1000">1000株</option>
+                                    </select>
+                                </div>
+
+                                <div class="input-with-unit">
+                                    <input type="number" id="amountShares" min="1" step="1" inputmode="numeric" placeholder="例：350">
+                                    <span>株</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="button" id="calculateTargetAmount" class="calculate-button">
+                            計算する
+                        </button>
+
+                        <div class="result">
+                            <div class="result-main">
+                                <span>必要な売却時株価</span>
+                                <strong id="amountSellPrice">—</strong>
+                            </div>
+
+                            <div class="result-row">
+                                <span>売却金額</span>
+                                <strong id="amountSellTotal">—</strong>
+                            </div>
+
+                            <div class="result-row result-rate">
+                                <span>損益率</span>
+                                <strong id="amountRate">—</strong>
+                            </div>
+
+                            <div class="result-row result-profit">
+                                <span>目標損益額（税引後）</span>
+                                <strong id="amountNetProfit">—</strong>
+                            </div>
+
+                            <div class="result-row" id="amountBeforeTaxRow">
+                                <span>税引前損益</span>
+                                <strong id="amountGrossProfit">—</strong>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-
-                <!-- =========================
-                     サブ：電卓・メモ
-                     ========================= -->
                 <aside class="utility-tools">
 
-                    <!-- 電卓 -->
                     <section class="utility-panel calculator-tool">
-
                         <h2>電卓</h2>
 
                         <div class="calculator-display">
-                            <input
-                                type="text"
-                                id="calcDisplay"
-                                value="0"
-                                readonly
-                                aria-label="電卓の表示"
-                            >
+                            <input type="text" id="calcDisplay" value="0" readonly aria-label="電卓の表示">
                         </div>
 
+                        <!-- 修正後の電卓HTMLレイアウト（＝と⌫を逆にした標準5x4グリッド） -->
+<div class="calculator-buttons">
+    <!-- Row 1 -->
+    <button type="button" data-calc-action="clear">C</button>
+    <button type="button" data-calc-action="sqrt">√</button>
+    <button type="button" data-calc-action="percent">％</button>
+    <button type="button" data-calc-action="operator" data-value="/">÷</button>
 
-                        <div class="calculator-buttons">
+    <!-- Row 2 -->
+    <button type="button" data-calc-action="number" data-value="7">7</button>
+    <button type="button" data-calc-action="number" data-value="8">8</button>
+    <button type="button" data-calc-action="number" data-value="9">9</button>
+    <button type="button" data-calc-action="operator" data-value="*">×</button>
 
-                            <button type="button" data-calc-action="clear">C</button>
-                            <button type="button" data-calc-action="operator" data-value="/">÷</button>
-                            <button type="button" data-calc-action="operator" data-value="*">×</button>
-                            <button type="button" data-calc-action="operator" data-value="-">−</button>
+    <!-- Row 3 -->
+    <button type="button" data-calc-action="number" data-value="4">4</button>
+    <button type="button" data-calc-action="number" data-value="5">5</button>
+    <button type="button" data-calc-action="number" data-value="6">6</button>
+    <button type="button" data-calc-action="operator" data-value="-">-</button>
 
-                            <button type="button" data-calc-action="number" data-value="7">7</button>
-                            <button type="button" data-calc-action="number" data-value="8">8</button>
-                            <button type="button" data-calc-action="number" data-value="9">9</button>
-                            <button type="button" data-calc-action="operator" data-value="+">＋</button>
+    <!-- Row 4 -->
+    <button type="button" data-calc-action="number" data-value="1">1</button>
+    <button type="button" data-calc-action="number" data-value="2">2</button>
+    <button type="button" data-calc-action="number" data-value="3">3</button>
+    <button type="button" data-calc-action="operator" data-value="+">+</button>
 
-                            <button type="button" data-calc-action="number" data-value="4">4</button>
-                            <button type="button" data-calc-action="number" data-value="5">5</button>
-                            <button type="button" data-calc-action="number" data-value="6">6</button>
-                            <button type="button" data-calc-action="number" data-value="0">0</button>
-
-                            <button type="button" data-calc-action="number" data-value="1">1</button>
-                            <button type="button" data-calc-action="number" data-value="2">2</button>
-                            <button type="button" data-calc-action="number" data-value="3">3</button>
-                            <button type="button" data-calc-action="decimal">.</button>
-
-                            <button
-                                type="button"
-                                class="calculator-equals"
-                                data-calc-action="equals"
-                            >
-                                =
-                            </button>
-
-                        </div>
-
+    <!-- Row 5 (位置を逆にして直感的に使いやすく修正) -->
+    <button type="button" data-calc-action="number" data-value="0">0</button>
+    <button type="button" data-calc-action="decimal">.</button>
+    <button type="button" data-calc-action="backspace">⌫</button>
+    <button type="button" class="calculator-equals" data-calc-action="equals">＝</button>
+</div>
                     </section>
 
-
-                    <!-- メモ -->
                     <section class="utility-panel memo-tool">
+                        <div class="memo-heading">
+                            <h2>メモ</h2>
+                            <button type="button" id="clearMemo" class="memo-clear-button">
+                                メモを消去
+                            </button>
+                        </div>
 
-                        <h2>メモ</h2>
+                        <textarea id="memo" placeholder="ここにメモできます。" aria-label="メモ"></textarea>
 
-                        <textarea
-                            id="memo"
-                            placeholder="ここにメモできます。"
-                            aria-label="メモ"
-                        ></textarea>
-
-                        <p class="memo-status" id="memoStatus">
-                            自動保存
-                        </p>
-
+                        <div class="memo-footer">
+                            <p class="memo-status" id="memoStatus">自動保存</p>
+                        </div>
                     </section>
-
                 </aside>
-
             </div>
 
-
-            <!-- 損益計算について -->
             <section class="calculator-description">
-
                 <h2>損益計算について</h2>
 
                 <p>
-                    かぶ電卓では、株の購入価格・売却価格・株数をもとに、株式の売却によって発生する利益または損失を計算します。
+                    かぶ電卓では、損益の計算、目標損益率から必要な売却時株価を求める計算、目標損益額から必要な売却時株価を求める計算ができます。
                 </p>
 
                 <p>
@@ -344,33 +409,315 @@
                 </p>
 
                 <p>
-                    損益、損益率、買付金額、売却金額を表示します。
+                    目標損益率は1%刻みで指定できます。目標損益額から計算する場合は、購入時株価（取得単価）、目標損益額、株数、口座区分を使い、目標額を達成するために必要な売却時株価を逆算します。特定・一般では利益に20.315%の税を考慮し、NISA・非課税では税を差し引きません。実際の税額や取引結果と異なる場合があります。
                 </p>
-
             </section>
-
         </section>
-
     </main>
 
-
     <footer class="site-footer">
-
         <p>
             <a href="../privacy/">プライバシーポリシー</a>
         </p>
 
         <p>&copy; 2026 かぶ電卓</p>
-        <!-- admax -->
-<script src="https://adm.shinobi.jp/s/3f68e8f1c77ed3982d49c8769b877991"></script>
-<!-- admax -->
 
+        <!-- admax -->
+        <script src="https://adm.shinobi.jp/s/3f68e8f1c77ed3982d49c8769b877991"></script>
+        <!-- admax -->
     </footer>
 
+    <script>
+    (() => {
+        const taxRate = 0.20315;
+        let account = 'taxable';
+        let targetAccount = 'taxable';
+        let amountAccount = 'taxable';
 
-    <script src="../script.js"></script>
+        const $ = id => document.getElementById(id);
+        const read = id => Number($(id).value);
+        const set = (id, value) => { $(id).textContent = value; };
+        const yen = n => Number.isFinite(n) ? `${Math.round(n).toLocaleString('ja-JP')} 円` : '—';
 
+        document.querySelectorAll('.calculation-mode').forEach(button => {
+            button.addEventListener('click', () => {
+                document.querySelectorAll('.calculation-mode').forEach(item => {
+                    item.classList.toggle('active', item === button);
+                });
+
+                const modes = ['profit', 'target', 'targetAmount'];
+                const panels = ['profitMode', 'targetMode', 'targetAmountMode'];
+
+                panels.forEach((panelId, index) => {
+                    $(panelId).style.display = modes[index] === button.dataset.mode ? '' : 'none';
+                });
+            });
+        });
+
+        const bindAccounts = (selector, attribute, setter) => {
+            document.querySelectorAll(selector).forEach(button => {
+                button.addEventListener('click', () => {
+                    document.querySelectorAll(selector).forEach(item => {
+                        item.classList.toggle('active', item === button);
+                    });
+
+                    setter(button.getAttribute(attribute));
+                });
+            });
+        };
+
+        bindAccounts(
+            '.account-button:not(.target-account-button):not(.amount-account-button)',
+            'data-account',
+            value => account = value
+        );
+
+        bindAccounts(
+            '.target-account-button',
+            'data-target-account',
+            value => targetAccount = value
+        );
+
+        bindAccounts(
+            '.amount-account-button',
+            'data-amount-account',
+            value => amountAccount = value
+        );
+
+        const selectedShares = (inputId, selectId) => {
+            return read(inputId) || Number($(selectId).value);
+        };
+
+        const connectShares = (inputId, selectId) => {
+            $(selectId).addEventListener('change', () => {
+                if ($(selectId).value) {
+                    $(inputId).value =$(selectId).value;
+                }
+            });
+
+            $(inputId).addEventListener('input', () => {
+                if ($(inputId).value) {$(selectId).value = '';
+                }
+            });
+        };
+
+        connectShares('sharesCustom', 'sharesSelect');
+        connectShares('targetShares', 'targetSharesSelect');
+        connectShares('amountShares', 'amountSharesSelect');
+
+        $('calculate').addEventListener('click', () => {
+            const buy = read('buyPrice');
+            const sell = read('sellPrice');
+            const count = selectedShares('sharesCustom', 'sharesSelect');
+
+            if (!(buy > 0 && sell >= 0 && count > 0)) {
+                alert('購入時株価、売却時株価、株数を入力してください。');
+                return;
+            }
+
+            const cost = buy * count;
+            const gross = (sell - buy) * count;
+            const net = gross > 0 && account === 'taxable'
+                ? gross * (1 - taxRate)
+                : gross;
+
+            set('sellAmount', yen(sell * count));
+            set('profitRate', `${(net / cost * 100).toFixed(2)}%`);
+            set('profit', yen(net));
+            set('buyAmount', yen(cost));
+            set('beforeTaxProfit', yen(gross));
+
+            $('beforeTaxRow').style.display = account === 'taxable' ? '' : 'none';
+        });
+
+        const calculateGoal = (buy, goalNet, count, accountType, mode) => {
+            if (!(buy > 0 && count > 0 && Number.isFinite(goalNet))) {
+                alert('必要な項目を入力してください。');
+                return;
+            }
+
+            const gross = goalNet > 0 && accountType === 'taxable'
+                ? goalNet / (1 - taxRate)
+                : goalNet;
+
+            const sell = buy + gross / count;
+            const cost = buy * count;
+
+            if (mode === 'target') {
+                set('targetSellPrice', yen(sell));
+                set('targetSellAmount', yen(sell * count));
+                set('targetRateResult', `${(goalNet / cost * 100).toFixed(2)}%`);
+                set('targetProfit', yen(goalNet));
+                set('targetBeforeTaxProfit', yen(gross));
+                $('targetBeforeTaxRow').style.display = accountType === 'taxable' ? '' : 'none';
+            } else {
+                set('amountSellPrice', yen(sell));
+                set('amountSellTotal', yen(sell * count));
+                set('amountRate', `${(goalNet / cost * 100).toFixed(2)}%`);
+                set('amountNetProfit', yen(goalNet));
+                set('amountGrossProfit', yen(gross));
+                $('amountBeforeTaxRow').style.display = accountType === 'taxable' ? '' : 'none';
+            }
+        };
+
+        $('calculateTarget').addEventListener('click', () => {
+            const buy = read('targetBuyPrice');
+            const count = selectedShares('targetShares', 'targetSharesSelect');
+            const rate = read('targetProfitRate');
+            const goalNet = buy * count * rate / 100;
+
+            calculateGoal(buy, goalNet, count, targetAccount, 'target');
+        });
+
+        $('calculateTargetAmount').addEventListener('click', () => {
+            calculateGoal(
+                read('amountBuyPrice'),
+                read('targetProfitAmount'),
+                selectedShares('amountShares', 'amountSharesSelect'),
+                amountAccount,
+                'amount'
+            );
+        });
+
+        const memo = $('memo');
+        memo.value = localStorage.getItem('kabuDentakuMemo') || '';
+
+        memo.addEventListener('input', () => {
+            localStorage.setItem('kabuDentakuMemo', memo.value);
+            $('memoStatus').textContent = '保存しました';
+        });
+
+        $('clearMemo').addEventListener('click', () => {
+            if (!confirm('メモを消去しますか？')) {
+                return;
+            }
+
+            memo.value = '';
+            localStorage.removeItem('kabuDentakuMemo');
+            $('memoStatus').textContent = '消去しました';
+        });
+
+        // =========================
+        // 電卓機能（％ボタンの標準挙動に対応）
+        // =========================
+        const display = $('calcDisplay');
+        let stored = null;
+        let operator = null;
+        let fresh = false;
+
+        document.querySelectorAll('[data-calc-action]').forEach(button => {
+            button.addEventListener('click', () => {
+                const action = button.dataset.calcAction;
+                const value = button.dataset.value;
+
+                // クリア (C)
+                if (action === 'clear') {
+                    display.value = '0';
+                    stored = null;
+                    operator = null;
+                    fresh = false;
+                    return;
+                }
+
+                // 一文字消す (⌫)
+                if (action === 'backspace') {
+                    if (fresh || display.value === 'エラー') return;
+                    display.value = display.value.length > 1 
+                        ? display.value.slice(0, -1) 
+                        : '0';
+                    return;
+                }
+
+                // 平方根 (√)
+                if (action === 'sqrt') {
+                    const current = Number(display.value);
+                    if (current < 0) {
+                        display.value = 'エラー';
+                    } else {
+                        display.value = String(Math.sqrt(current));
+                    }
+                    fresh = true;
+                    return;
+                }
+
+                // パーセント (％) の正しい電卓挙動
+                if (action === 'percent') {
+                    const current = Number(display.value);
+
+                    if (operator && stored !== null) {
+                        let result;
+                        if (operator === '/') {
+                            // 例: 80 ÷ 800 ％  => 10 (80は800の10%)
+                            result = (stored / current) * 100;
+                        } else if (operator === '*') {
+                            // 例: 800 × 10 ％  => 80 (800の10%)
+                            result = (stored * current) / 100;
+                        } else if (operator === '+') {
+                            // 例: 1000 ＋ 10 ％ => 1100 (1000の10%増し)
+                            result = stored + (stored * current / 100);
+                        } else if (operator === '-') {
+                            // 例: 1000 − 10 ％ => 900 (1000の10%引き)
+                            result = stored - (stored * current / 100);
+                        }
+
+                        display.value = Number.isFinite(result) ? String(result) : 'エラー';
+                        stored = null;
+                        operator = null;
+                        fresh = true;
+                    } else {
+                        // 単体で押された場合は 100 で割る
+                        display.value = String(current / 100);
+                        fresh = true;
+                    }
+                    return;
+                }
+
+                // 数値・小数点入力
+                if (action === 'number' || action === 'decimal') {
+                    if (fresh || display.value === 'エラー') {
+                        display.value = '0';
+                        fresh = false;
+                    }
+
+                    if (action === 'decimal') {
+                        if (!display.value.includes('.')) {
+                            display.value += '.';
+                        }
+                    } else {
+                        display.value = display.value === '0'
+                            ? value
+                            : display.value + value;
+                    }
+                    return;
+                }
+
+                // 四則演算子 (+, -, *, /)
+                if (action === 'operator') {
+                    stored = Number(display.value);
+                    operator = value;
+                    fresh = true;
+                    return;
+                }
+
+                // 計算実行 (=)
+                if (action === 'equals' && operator) {
+                    const right = Number(display.value);
+                    let result;
+
+                    if (operator === '+') result = stored + right;
+                    if (operator === '-') result = stored - right;
+                    if (operator === '*') result = stored * right;
+                    if (operator === '/') result = stored / right;
+
+                    display.value = Number.isFinite(result) ? String(result) : 'エラー';
+                    stored = null;
+                    operator = null;
+                    fresh = true;
+                }
+            });
+        });
+    })();
+    </script>
 
 </body>
-
 </html>
