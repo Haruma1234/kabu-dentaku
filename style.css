@@ -713,3 +713,222 @@ main {
         font-size: 14px;
     }
 }
+/* ==========================================
+   運営者情報 (about.html) スタイル
+   ========================================== */
+
+/* メインコンテナ */
+.main-container {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 0 16px;
+}
+
+/* カードレイアウト */
+.card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+.card-header {
+  padding: 24px 30px;
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  color: #ffffff;
+}
+
+.card-header h1 {
+  margin: 0 0 8px 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.card-subtitle {
+  margin: 0;
+  font-size: 0.875rem;
+  opacity: 0.85;
+}
+
+.card-body {
+  padding: 30px;
+}
+
+/* テーブルスタイル */
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 24px;
+}
+
+.styled-table th,
+.styled-table td {
+  padding: 16px 20px;
+  text-align: left;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.styled-table th {
+  width: 25%;
+  background-color: #f8fafc;
+  color: #334155;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.styled-table td {
+  color: #475569;
+}
+
+.styled-table tr:last-child th,
+.styled-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* リンク文字 */
+.link-text {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.link-text:hover {
+  text-decoration: underline;
+}
+
+/* サービス運営理念ボックス */
+.policy-box {
+  background-color: #f1f5f9;
+  border-left: 4px solid #2563eb;
+  padding: 18px 20px;
+  border-radius: 0 8px 8px 0;
+}
+
+.policy-box h3 {
+  margin: 0 0 8px 0;
+  font-size: 1rem;
+  color: #1e293b;
+}
+
+.policy-box p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #475569;
+  line-height: 1.6;
+}
+
+/* フッターナビゲーション */
+.app-footer {
+  text-align: center;
+  padding: 30px 20px;
+  margin-top: 50px;
+  background-color: #ffffff;
+  border-top: 1px solid #e2e8f0;
+}
+
+.footer-nav a {
+  color: #64748b;
+  text-decoration: none;
+  font-size: 0.875rem;
+}
+
+.footer-nav a:hover {
+  color: #2563eb;
+}
+
+.footer-nav .divider {
+  margin: 0 8px;
+  color: #cbd5e1;
+}
+
+/* レスポンシブ対応（スマホ表示） */
+@media (max-width: 600px) {
+  .styled-table th,
+  .styled-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .styled-table th {
+    background-color: transparent;
+    padding-bottom: 4px;
+    color: #1e293b;
+  }
+
+  .styled-table td {
+    padding-top: 0;
+    padding-bottom: 20px;
+  }
+}/* ==========================================
+   脱・AIテンプレ（運営者情報スタイル）
+   ========================================== */
+
+/* 簡易ヘッダー */
+.simple-header {
+  border-bottom: 1px solid #e2e8f0;
+  padding: 12px 20px;
+  background-color: #ffffff;
+}
+
+.simple-header .site-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1e293b;
+  text-decoration: none;
+}
+
+/* メイン領域 */
+.about-wrapper {
+  max-width: 640px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.page-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 24px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #0f172a;
+}
+
+/* シンプルなリストレイアウト */
+.about-list {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  row-gap: 20px;
+  column-gap: 16px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.about-list dt {
+  font-weight: 600;
+  color: black;
+}
+
+.about-list dd {
+  margin: 0;
+  color: #334155;
+}
+
+.about-list a {
+  color: #2563eb;
+  text-decoration: underline;
+}
+
+/* スマホ対応 */
+@media (max-width: 480px) {
+  .about-list {
+    grid-template-columns: 1fr;
+    row-gap: 6px;
+  }
+  .about-list dt {
+    color: #94a3b8;
+    font-size: 0.85rem;
+    margin-top: 10px;
+  }
+}
