@@ -137,7 +137,7 @@ main {
 .input-group label {
     display: block;
     margin-bottom: 9px;
-    color: #333;
+    color: black;
     font-size: 14px;
     font-weight: 600;
 }
@@ -861,4 +861,110 @@ main {
     padding-top: 0;
     padding-bottom: 20px;
   }
+}
+/* ナンピン計算セクション */
+.calc-section {
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+}
+
+.calc-section h2 {
+  font-size: 1.2rem;
+  color: #0f172a;
+  margin-bottom: 20px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #0f172a;
+}
+
+.input-group {
+  margin-bottom: 16px;
+}
+
+.input-group label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #475569;
+  margin-bottom: 6px;
+}
+
+.input-unit {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.input-unit input {
+  flex: 1;
+  padding: 10px 12px;
+  font-size: 1rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  outline: none;
+}
+
+.input-unit input:focus {
+  border-color: #2563eb;
+}
+
+.input-unit span {
+  font-size: 0.9rem;
+  color: #64748b;
+  width: 24px;
+}
+
+.form-divider {
+  border: 0;
+  border-top: 1px dashed #cbd5e1;
+  margin: 20px 0;
+}
+
+/* 計算結果ボックス */
+.result-box {
+  margin-top: 24px;
+  padding: 16px;
+  background-color: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+}
+
+.result-row.highlight {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.result-row .result-label {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.result-row .result-value {
+  font-size: 1.1rem;
+  color: #0f172a;
+}
+
+.result-row .result-value strong {
+  font-size: 1.6rem;
+  color: #2563eb;
+}
+
+.result-details {
+  display: grid;
+  gap: 8px;
+  font-size: 0.85rem;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  color: #475569;
 }

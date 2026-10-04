@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V0Z3D5GNX5"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-V0Z3D5GNX5');
+    </script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-W8XJ742LCZ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-W8XJ742LCZ');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>株のナンピン計算｜かぶ電卓</title>
+
+    <meta
+        name="description"
+        content="保有株の難平（ナンピン）買い増し後の平均取得単価や、目標とする平均取得単価に必要な買増株数を計算できます。"
+    >
+
+    <link rel="stylesheet" href="../style.css">
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7074374760590472"
+        crossorigin="anonymous">
+    </script>
+</head>
+
+<body>
+
+    <header class="site-header">
+        <a href="../index.html" class="logo">かぶ電卓</a>
+    </header>
+
+    <main>
+        <section class="calculator-section">
+
+            <div class="page-heading">
+                <h1>ナンピン計算</h1>
+                <span class="trade-type">現物取引</span>
+            </div>
+
+            <div class="calculator-workspace">
+
+                <div class="calculator">
+
+                    <div class="calculation-modes">
+                        <button type="button" class="calculation-mode active" data-mode="nanpin">
+                            平均取得単価を計算
+                        </button>
+
+                        <button type="button" class="calculation-mode" data-mode="targetNanpin">
+                            目標平均株価から計算
+                        </button>
+                    </div>
+
+                    <!-- 平均取得単価を計算 -->
+                    <div class="calculation-panel" id="nanpinMode">
+
+                        <div class="input-group">
+                            <label for="currentPrice">現在の保有株価（取得単価）</label>
+                            <div class="input-with-unit">
+                                <input type="number" id="currentPrice" min="0" step="1" inputmode="decimal" placeholder="例：1000">
+                                <span>円</span>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="currentSharesCustom">現在の保有株数</label>
+                            <div class="shares-input">
+                                <div class="shares-select-wrapper">
+                                    <select id="currentSharesSelect">
+                                        <option value="">—</option>
+                                        <option value="100">100株</option>
+                                        <option value="200">200株</option>
+                                        <option value="300">300株</option>
+                                        <option value="400">400株</option>
+                                        <option value="500">500株</option>
+                                        <option value="600">600株</option>
+                                        <option value="700">700株</option>
+                                        <option value="800">800株</option>
+                                        <option value="900">900株</option>
+                                        <option value="1000">1000株</option>
+                                    </select>
+                                </div>
+
+                                <div class="input-with-unit">
+                                    <input type="number" id="currentSharesCustom" min="1" step="1" inputmode="numeric" placeholder="例：100">
+                                    <span>株</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="buyPrice">買い増し株価</label>
+                            <div class="input-with-unit">
+                                <input type="number" id="buyPrice" min="0" step="1" inputmode="decimal" placeholder="例：800">
+                                <span>円</span>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="addSharesCustom">買い増し株数</label>
+                            <div class="shares-input">
+                                <div class="shares-select-wrapper">
+                                    <select id="addSharesSelect">
+                                        <option value="">—</option>
+                                        <option value="100">100株</option>
+                                        <option value="200">200株</option>
+                                        <option value="300">300株</option>
+                                        <option value="400">400株</option>
+                                        <option value="500">500株</option>
+                                        <option value="600">600株</option>
+                                        <option value="700">700株</option>
+                                        <option value="800">800株</option>
+                                        <option value="900">900株</option>
+                                        <option value="1000">1000株</option>
+                                    </select>
+                                </div>
+
+                                <div class="input-with-unit">
+                                    <input type="number" id="addSharesCustom" min="1" step="1" inputmode="numeric" placeholder="例：100">
+                                    <span>株</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="button" id="calculateNanpin" class="calculate-button">
+                            計算する
+                        </button>
+
+                        <div class="result">
+                            <div class="result-main">
+                                <span>平均取得単価</span>
+                                <strong id="avgPrice">—</strong>
+                            </div>
+
+                            <div class="result-row result-profit">
+                                <span>合計投資金額</span>
+                                <strong id="totalCost">—</strong>
+                            </div>
+
+                            <div class="result-row">
+                                <span>合計保有株数</span>
+                                <strong id="totalShares">—</strong>
+                            </div>
+
+                            <div class="result-row">
+                                <span>追加投資金額</span>
+                                <strong id="addCost">—</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 目標平均株価から計算 -->
+                    <div class="calculation-panel" id="targetNanpinMode" style="display: none;">
+
+                        <div class="input-group">
+                            <label for="targetCurrentPrice">現在の保有株価（取得単価）</label>
+                            <div class="input-with-unit">
+                                <input type="number" id="targetCurrentPrice" min="0" step="1" inputmode="decimal" placeholder="例：1000">
+                                <span>円</span>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="targetCurrentShares">現在の保有株数</label>
+                            <div class="shares-input">
+                                <div class="shares-select-wrapper">
+                                    <select id="targetCurrentSharesSelect">
+                                        <option value="">—</option>
+                                        <option value="100">100株</option>
+                                        <option value="200">200株</option>
+                                        <option value="300">300株</option>
+                                        <option value="400">400株</option>
+                                        <option value="500">500株</option>
+                                        <option value="600">600株</option>
+                                        <option value="700">700株</option>
+                                        <option value="800">800株</option>
+                                        <option value="900">900株</option>
+                                        <option value="1000">1000株</option>
+                                    </select>
+                                </div>
+
+                                <div class="input-with-unit">
+                                    <input type="number" id="targetCurrentShares" min="1" step="1" inputmode="numeric" placeholder="例：100">
+                                    <span>株</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="targetBuyPrice">買い増し予定株価</label>
+                            <div class="input-with-unit">
+                                <input type="number" id="targetBuyPrice" min="0" step="1" inputmode="decimal" placeholder="例：800">
+                                <span>円</span>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="targetAvgPrice">目標平均取得単価</label>
+                            <div class="input-with-unit">
+                                <input type="number" id="targetAvgPrice" min="0" step="1" inputmode="decimal" placeholder="例：900">
+                                <span>円</span>
+                            </div>
+                        </div>
+
+                        <button type="button" id="calculateTargetNanpin" class="calculate-button">
+                            計算する
+                        </button>
+
+                        <div class="result">
+                            <div class="result-main">
+                                <span>必要な買増株数</span>
+                                <strong id="requiredShares">—</strong>
+                            </div>
+
+                            <div class="result-row result-profit">
+                                <span>追加投資金額</span>
+                                <strong id="requiredAddCost">—</strong>
+                            </div>
+
+                            <div class="result-row">
+                                <span>買い増し後の合計株数</span>
+                                <strong id="targetTotalShares">—</strong>
+                            </div>
+
+                            <div class="result-row">
+                                <span>買い増し後の合計投資金額</span>
+                                <strong id="targetTotalCost">—</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <aside class="utility-tools">
+
+                    <section class="utility-panel calculator-tool">
+                        <h2>電卓</h2>
+
+                        <div class="calculator-display">
+                            <input type="text" id="calcDisplay" value="0" readonly aria-label="電卓の表示">
+                        </div>
+
+                        <div class="calculator-buttons">
+                            <!-- Row 1 -->
+                            <button type="button" data-calc-action="clear">C</button>
+                            <button type="button" data-calc-action="sqrt">√</button>
+                            <button type="button" data-calc-action="percent">％</button>
+                            <button type="button" data-calc-action="operator" data-value="/">÷</button>
+
+                            <!-- Row 2 -->
+                            <button type="button" data-calc-action="number" data-value="7">7</button>
+                            <button type="button" data-calc-action="number" data-value="8">8</button>
+                            <button type="button" data-calc-action="number" data-value="9">9</button>
+                            <button type="button" data-calc-action="operator" data-value="*">×</button>
+
+                            <!-- Row 3 -->
+                            <button type="button" data-calc-action="number" data-value="4">4</button>
+                            <button type="button" data-calc-action="number" data-value="5">5</button>
+                            <button type="button" data-calc-action="number" data-value="6">6</button>
+                            <button type="button" data-calc-action="operator" data-value="-">-</button>
+
+                            <!-- Row 4 -->
+                            <button type="button" data-calc-action="number" data-value="1">1</button>
+                            <button type="button" data-calc-action="number" data-value="2">2</button>
+                            <button type="button" data-calc-action="number" data-value="3">3</button>
+                            <button type="button" data-calc-action="operator" data-value="+">+</button>
+
+                            <!-- Row 5 -->
+                            <button type="button" data-calc-action="number" data-value="0">0</button>
+                            <button type="button" data-calc-action="decimal">.</button>
+                            <button type="button" data-calc-action="backspace">⌫</button>
+                            <button type="button" class="calculator-equals" data-calc-action="equals">＝</button>
+                        </div>
+                    </section>
+
+                    <section class="utility-panel memo-tool">
+                        <div class="memo-heading">
+                            <h2>メモ</h2>
+                            <button type="button" id="clearMemo" class="memo-clear-button">
+                                メモを消去
+                            </button>
+                        </div>
+
+                        <textarea id="memo" placeholder="ここにメモできます。" aria-label="メモ"></textarea>
+
+                        <div class="memo-footer">
+                            <p class="memo-status" id="memoStatus">自動保存</p>
+                        </div>
+                    </section>
+                </aside>
+            </div>
+
+            <section class="calculator-description">
+                <h2>ナンピン（難平）計算について</h2>
+
+                <p>
+                    かぶ電卓のナンピン計算機では、保有している株式を買い増し（ナンピン）した際の「平均取得単価」や「合計投資金額」を算出できます。また、平均取得単価をどこまで下げたいかという「目標平均取得単価」から必要な買い増し株数を逆算することも可能です。
+                </p>
+
+                <p>
+                    ナンピン（難平）は平均買い付け単価を下げることで、株価が回復した際に利益を得やすく（または損切りしやすく）する手法ですが、買い増しによって投資全体の金額が膨らむリスクも伴います。
+                </p>
+
+                <p>
+                    本ツールを活用して、追加でいくらの資金が必要になるのか、平均取得単価がどの程度下がるのかを事前に把握し、リスク管理にお役立てください。
+                </p>
+            </section>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>
+            <a href="../privacy/">プライバシーポリシー</a><br>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSde05ziMstpzaKHrBFgpSjmbeXkqPF-WG4Gf9e9zxc0MB6xwA/viewform?usp=dialog">お問い合わせ</a><br>
+            <a href="../about/">運営者情報</a>
+        </p>
+
+        <p>&copy; 2026 かぶ電卓</p>
+    </footer>
+
+    <script>
+    (() => {
+        const $ = id => document.getElementById(id);
+        const read = id => Number($(id).value);
+        const set = (id, value) => { $(id).textContent = value; };
+        const yen = n => Number.isFinite(n) ? `${Math.round(n).toLocaleString('ja-JP')} 円` : '—';
+        const shares = n => Number.isFinite(n) ? `${Math.ceil(n).toLocaleString('ja-JP')} 株` : '—';
+
+        // モード切替
+        document.querySelectorAll('.calculation-mode').forEach(button => {
+            button.addEventListener('click', () => {
+                document.querySelectorAll('.calculation-mode').forEach(item => {
+                    item.classList.toggle('active', item === button);
+                });
+
+                const modes = ['nanpin', 'targetNanpin'];
+                const panels = ['nanpinMode', 'targetNanpinMode'];
+
+                panels.forEach((panelId, index) => {
+                    $(panelId).style.display = modes[index] === button.dataset.mode ? '' : 'none';
+                });
+            });
+        });
+
+        // 株数セレクトと入力欄の連動
+        const connectShares = (inputId, selectId) => {
+            $(selectId).addEventListener('change', () => {
+                if ($(selectId).value) {
+                    $(inputId).value =$(selectId).value;
+                }
+            });
+
+            $(inputId).addEventListener('input', () => {
+                if ($(inputId).value) {$(selectId).value = '';
+                }
+            });
+        };
+
+        connectShares('currentSharesCustom', 'currentSharesSelect');
+        connectShares('addSharesCustom', 'addSharesSelect');
+        connectShares('targetCurrentShares', 'targetCurrentSharesSelect');
+
+        const selectedShares = (inputId, selectId) => {
+            return read(inputId) || Number($(selectId).value);
+        };
+
+        // 1. 通常ナンピン計算
+        $('calculateNanpin').addEventListener('click', () => {
+            const currentPrice = read('currentPrice');
+            const currentShares = selectedShares('currentSharesCustom', 'currentSharesSelect');
+            const buyPrice = read('buyPrice');
+            const addShares = selectedShares('addSharesCustom', 'addSharesSelect');
+
+            if (!(currentPrice > 0 && currentShares > 0 && buyPrice > 0 && addShares > 0)) {
+                alert('すべての項目を正しく入力してください。');
+                return;
+            }
+
+            const currentTotal = currentPrice * currentShares;
+            const addCost = buyPrice * addShares;
+            const totalCost = currentTotal + addCost;
+            const totalShares = currentShares + addShares;
+            const avgPrice = totalCost / totalShares;
+
+            set('avgPrice', yen(avgPrice));
+            set('totalCost', yen(totalCost));
+            set('totalShares', shares(totalShares));
+            set('addCost', yen(addCost));
+        });
+
+        // 2. 目標平均株価からの計算
+        $('calculateTargetNanpin').addEventListener('click', () => {
+            const currentPrice = read('targetCurrentPrice');
+            const currentShares = selectedShares('targetCurrentShares', 'targetCurrentSharesSelect');
+            const buyPrice = read('targetBuyPrice');
+            const targetAvgPrice = read('targetAvgPrice');
+
+            if (!(currentPrice > 0 && currentShares > 0 && buyPrice > 0 && targetAvgPrice > 0)) {
+                alert('すべての項目を正しく入力してください。');
+                return;
+            }
+
+            if (buyPrice >= currentPrice) {
+                alert('買い増し予定株価は現在の保有株価より低い必要があります。');
+                return;
+            }
+
+            if (targetAvgPrice >= currentPrice || targetAvgPrice <= buyPrice) {
+                alert('目標平均株価は「買い増し予定株価」と「現在の保有株価」の間の金額を指定してください。');
+                return;
+            }
+
+            // 必要な株数 = 保有株数 * (現在価格 - 目標価格) / (目標価格 - 買増価格)
+            const requiredSharesCount = (currentShares * (currentPrice - targetAvgPrice)) / (targetAvgPrice - buyPrice);
+            const addCost = requiredSharesCount * buyPrice;
+            const totalShares = currentShares + requiredSharesCount;
+            const totalCost = (currentPrice * currentShares) + addCost;
+
+            set('requiredShares', shares(requiredSharesCount));
+            set('requiredAddCost', yen(addCost));
+            set('targetTotalShares', shares(totalShares));
+            set('targetTotalCost', yen(totalCost));
+        });
+
+        // メモ帳機能
+        const memo = $('memo');
+        memo.value = localStorage.getItem('kabuDentakuMemo') || '';
+
+        memo.addEventListener('input', () => {
+            localStorage.setItem('kabuDentakuMemo', memo.value);
+            $('memoStatus').textContent = '保存しました';
+        });
+
+        $('clearMemo').addEventListener('click', () => {
+            if (!confirm('メモを消去しますか？')) {
+                return;
+            }
+
+            memo.value = '';
+            localStorage.removeItem('kabuDentakuMemo');
+            $('memoStatus').textContent = '消去しました';
+        });
+
+        // 電卓機能
+        const display = $('calcDisplay');
+        let stored = null;
+        let operator = null;
+        let fresh = false;
+
+        document.querySelectorAll('[data-calc-action]').forEach(button => {
+            button.addEventListener('click', () => {
+                const action = button.dataset.calcAction;
+                const value = button.dataset.value;
+
+                if (action === 'clear') {
+                    display.value = '0';
+                    stored = null;
+                    operator = null;
+                    fresh = false;
+                    return;
+                }
+
+                if (action === 'backspace') {
+                    if (fresh || display.value === 'エラー') return;
+                    display.value = display.value.length > 1 
+                        ? display.value.slice(0, -1) 
+                        : '0';
+                    return;
+                }
+
+                if (action === 'sqrt') {
+                    const current = Number(display.value);
+                    if (current < 0) {
+                        display.value = 'エラー';
+                    } else {
+                        display.value = String(Math.sqrt(current));
+                    }
+                    fresh = true;
+                    return;
+                }
+
+                if (action === 'percent') {
+                    const current = Number(display.value);
+                    if (operator && stored !== null) {
+                        let result;
+                        if (operator === '/') result = (stored / current) * 100;
+                        else if (operator === '*') result = (stored * current) / 100;
+                        else if (operator === '+') result = stored + (stored * current / 100);
+                        else if (operator === '-') result = stored - (stored * current / 100);
+
+                        display.value = Number.isFinite(result) ? String(result) : 'エラー';
+                        stored = null;
+                        operator = null;
+                        fresh = true;
+                    } else {
+                        display.value = String(current / 100);
+                        fresh = true;
+                    }
+                    return;
+                }
+
+                if (action === 'number' || action === 'decimal') {
+                    if (fresh || display.value === 'エラー') {
+                        display.value = '0';
+                        fresh = false;
+                    }
+
+                    if (action === 'decimal') {
+                        if (!display.value.includes('.')) {
+                            display.value += '.';
+                        }
+                    } else {
+                        display.value = display.value === '0'
+                            ? value
+                            : display.value + value;
+                    }
+                    return;
+                }
+
+                if (action === 'operator') {
+                    stored = Number(display.value);
+                    operator = value;
+                    fresh = true;
+                    return;
+                }
+
+                if (action === 'equals' && operator) {
+                    const right = Number(display.value);
+                    let result;
+
+                    if (operator === '+') result = stored + right;
+                    if (operator === '-') result = stored - right;
+                    if (operator === '*') result = stored * right;
+                    if (operator === '/') result = stored / right;
+
+                    display.value = Number.isFinite(result) ? String(result) : 'エラー';
+                    stored = null;
+                    operator = null;
+                    fresh = true;
+                }
+            });
+        });
+    })();
+    </script>
+
+</body>
+</html>

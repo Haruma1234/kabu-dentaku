@@ -1132,3 +1132,67 @@ function formatPercent(value) {
         "%";
 
 }
+
+// 平均取得単価の計算
+document.addEventListener('DOMContentLoaded', () => {
+  // 入力要素の取得
+  const currentSharesInput = document.getElementById('current-shares');
+  const currentPriceInput  = document.getElementById('current-price');
+  const addSharesInput     = document.getElementById('add-shares');
+  const addPriceInput      = document.getElementById('add-price');
+
+  // 表示要素の取得
+  const newAverageEl = document.getElementById('new-average');
+  const totalSharesEl = document.getElementById('total-shares');
+  const totalCostEl   = document.getElementById('total-cost');
+  const priceDiffEl   = document.getElementById('price-diff');
+
+  // 計算イベントのバインド
+  const inputs = [currentSharesInput, currentPriceInput, addSharesInput, addPriceInput];
+  inputs.forEach(input => {
+    input.addEventListener('input', calculateNanpin);
+  });
+
+  function calculateNanpin() {
+    const currentShares = parseFloat(currentSharesInput.value) || 0;
+    const currentPrice  = parseFloat(currentPriceInput.value) || 0;
+    const addShares     = parseFloat(addSharesInput.value) || 0;
+    const addPrice      = parseFloat(addPriceInput.value) || 0;
+
+    const totalShares = currentShares + addShares;
+    
+    if (totalShares === 0) {
+      newAverageEl.textContent = '0';
+      totalSharesEl.textContent = '0 株';
+      totalCostEl.textContent = '0 円';
+      priceDiffEl.textContent = '0 円';
+      return;
+    }
+
+    // 計算ロジック
+    const currentTotalCost = currentShares * currentPrice;
+    const addTotalCost     = addShares * addPrice;
+    const grandTotalCost   = currentTotalCost + addTotalCost;
+
+    // 新しい平均取得単価（小数点第2位で四捨五入）
+    const newAverage = grandTotalCost / totalShares;
+    const diff = newAverage - currentPrice;
+
+    // 画面への反映（カンマ区切りフォーマット）
+    newAverageEl.textContent = newAverage.toLocaleString('ja-JP', { maximumFractionDigits: 1 });
+    totalSharesEl.textContent = `${totalShares.toLocaleString('ja-JP')} 株`;
+    totalCostEl.textContent = `${grandTotalCost.toLocaleString('ja-JP')} 円`;
+
+    // 取得単価の下落・上昇表示
+    if (diff < 0) {
+      priceDiffEl.textContent = `${diff.toLocaleString('ja-JP', { maximumFractionDigits: 1 })} 円 (難平効果あり)`;
+      priceDiffEl.style.color = '#10b981'; // 緑色
+    } else if (diff > 0) {
+      priceDiffEl.textContent = `+${diff.toLocaleString('ja-JP', { maximumFractionDigits: 1 })} 円 (買い増し)`;
+      priceDiffEl.style.color = '#ef4444'; // 赤色
+    } else {
+      priceDiffEl.textContent = '変化なし';
+      priceDiffEl.style.color = '#64748b';
+    }
+  }
+});
